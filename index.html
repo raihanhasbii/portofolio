@@ -381,11 +381,25 @@
               method="post"
               action="contact.php"
               role="form"
+              name="portofolio-contact-web"
             >
               <div class="messages"></div>
               <div class="controls">
                 <div class="row">
                   <div class="col-md-12">
+                    <div
+                      class="alert alert-primary alert-dismissible fade show d-none my-alert"
+                      role="alert"
+                    >
+                      <strong>Terima Kasih!</strong> Pesan anda sudah saya
+                      terima.
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
                     <div class="form-group">
                       <label for="form_name">Name *</label>
                       <input
@@ -435,7 +449,7 @@
                       <label for="form_message">Message *</label>
                       <textarea
                         id="form_message"
-                        name="message"
+                        name="pesan"
                         class="form-control"
                         placeholder="Your Message"
                         rows="4"
@@ -448,10 +462,22 @@
                   <div class="col-md-12 text-center">
                     <button
                       type="submit"
-                      class="btn btn-primary"
-                      style="margin-top: 7%"
+                      class="btn btn-primary btn-send-message"
+                      style="margin-top: 3%"
                     >
                       Send Message
+                    </button>
+                    <button
+                      class="btn btn-primary btn-loading d-none"
+                      type="button"
+                      disabled
+                      style="margin-top: 3%"
+                    >
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        aria-hidden="true"
+                      ></span>
+                      <span role="status">Loading...</span>
                     </button>
                   </div>
                 </div>
@@ -472,6 +498,34 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
       AOS.init();
+    </script>
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbxtJkakeJXmXKVV8IGdhjz9UCkzXhlAza2Dbbsa8h-6tdMuJvwYODKwGP06IdZItmvY/exec";
+      const form = document.forms["portofolio-contact-web"];
+      const btnsendmessage = document.querySelector(".btn-send-message");
+      const btnloading = document.querySelector(".btn-loading");
+      const myalert = document.querySelector(".my-alert");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // ketika tombol submit di klik
+        // tampilkan tombol loading, hilangkan tombol kirim
+        btnloading.classList.toggle("d-none");
+        btnsendmessage.classList.toggle("d-none");
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            // sekarang tombol kirim, hilangkan tombol loading
+            btnloading.classList.toggle("d-none");
+            btnsendmessage.classList.toggle("d-none");
+            // tampilkan alert
+            myalert.classList.toggle("d-none");
+            // reset form
+            form.reset();
+            console.log("Success!", response);
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
     </script>
   </body>
 </html>
