@@ -42,6 +42,7 @@ p {
 
 .header {
   min-height: 600px;
+  margin: auto;
   position: relative;
   text-align: center;
   background: -webkit-linear-gradient(to right, #414345, #232526);
