@@ -185,3 +185,43 @@ p {
 .gallery-card:hover {
   transform: scale(1.05);
 }
+
+/* contact section */
+footer {
+  background-color: #292929;
+  color: #fff;
+  padding: 11px;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  font-size: 1.2em;
+  color: #fff;
+}
+
+footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+footer ul li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s ease-in-out;
+}
+
+footer a:hover {
+  color: var(--primary); /* Ganti warna saat hover */
+}
+
+/* Efek untuk ikon sosial media */
+footer i {
+  font-size: 1.5em;
+  margin-right: 5px;
+}
